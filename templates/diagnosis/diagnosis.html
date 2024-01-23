@@ -1,0 +1,477 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Diagnosis {% endblock %}
+
+{% block css %}
+  <link href="{% static 'css/diagnosis.css' %}" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Include Font Awesome for icons -->
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row grey-background">
+    <!-- Blue Sidebar on the Left with Navbar -->
+    <div class="col-md-2 blue-sidebar vh-100">
+      <nav class="navbar navbar-expand-lg navbar-dark flex-column">
+        <!-- Brand Logo (Home) -->
+        <a class="navbar-brand mb-2" href="#">
+          <img id="fundusLogo" src="{% static 'img/assets/Rx_logo.svg'%}" alt="FundusAI Logo">
+        </a>
+
+        <!-- Navbar Toggler (For Mobile) -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav flex-column">
+            <!-- Dashboard with Home Icon -->
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-home orange-icons"></i>&nbsp;&nbsp;&nbsp;Dashboard</a>
+            </li>
+
+            <!-- Reports with Pie Chart Icon -->
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-chart-pie orange-icons"></i>&nbsp;&nbsp;&nbsp;Reports</a>
+            </li>
+
+            <!-- Goals with Heart Icon -->
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-heart orange-icons"></i>&nbsp;&nbsp;&nbsp;Goals</a>
+            </li>
+
+            <!-- Reminders with Calendar Icon -->
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="far fa-calendar-alt orange-icons"></i>&nbsp;&nbsp;&nbsp;Reminders</a>
+            </li>
+
+            <!-- Settings with Settings Icon -->
+            <li class="nav-item">
+              <a class="nav-link white-nav-link" href="#"><i class="fas fa-cogs orange-icons"></i>&nbsp;&nbsp;&nbsp;Settings</a>
+            </li>
+
+            <!-- Log out -->
+            <li class="nav-item" id="logout">
+              <a class="nav-link" href="#"><i class="fas fa-sign-out orange-icons"></i><span class="orange-icons">&nbsp;&nbsp;Log out</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Grey Middle Area -->
+    <div class="col-md-8" id="mainContent">
+
+      <!-- Right-aligned Search Bar with Search Icon -->
+      <div class="search-bar mt-3">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          <input type="text" class="form-control" placeholder="Search any keywords">
+        </div>
+      </div>
+      
+      <!-- Hospital Name -->
+      <div class="hospital-name">
+        <h5>NISA Premier Hospital&nbsp;&nbsp;<i class="fas fa-hospital" style="color: #419F99;"></i></h5>
+      </div>
+
+      <!-- Greet Doctor Card -->
+      <div id="parent">
+        <!-- Blue Card Area -->
+        <div class="card-area">
+          <!-- Greeting and Content -->
+          <div class="card-content">
+            <h4 class="grey-heading">Hello, <span id="greeting">Dr Hassan</span></h4>
+            <p class="greeting-card-content">Have a nice day and don’t forget to take care of your health!</p>
+            <a href="#" style="font-weight: bolder; color: white;">Learn More ></a>
+          </div>
+        </div>
+        <!-- Image Overlay on the Left -->
+        <img src="{% static 'img/assets/Open_Peeps_-_Standing_1.png'%}" alt="Overlay Image" class="overlay-image">
+      </div>
+
+      <!-- IS RETINOPATHY PRESENT -->
+      <div class="mt-3 text-center" id="retinopathy-status" style="display: none; position: relative;">
+        <p>Diabetic Retinopathy <span id="status"></span><p>
+      </div>
+
+      <!-- Make Diagnosis Section -->
+      <h4 class="make-diagnosis mt-3 text-center" id="makeDiagnosisHeader">Make Diagnosis</h4>
+
+      <div class="detail-cards mt-4 row">
+        <!-- Image Preview Card (initially hidden) -->
+        <div class="image-preview-card mt-2 mb-1" id="image-preview-card" style="display: none; position: relative;">
+          <img class="status-icon" id="green-tick" src="{% static 'img/assets/tick.png'%}">
+          <img class="status-icon" id="x-icon" src="{% static 'img/assets/x_icon.png'%}">
+          <div class="mt-6 mb-6 mx-6 my-6">
+            <img class="mx-auto" id="uploaded-image" alt="Uploaded Image">
+          </div>
+        </div>
+
+        <!-- Patient info card (Revealed only after Make Diagnosis) -->
+        <div class="patient-info-card mx-2 mt-2" id="patientInfoCard" style="display: none;">
+          <p id="patientInfoHeader">Patient Information <img class="status-icon " id="x-icon" src="{% static 'img/assets/patient_info_icon.png'%}"></p>
+          <p class="patient-info">Musa Olayinka Eze</p>
+          <p class="patient-info">Male</p>
+          <p class="patient-info">23 years old</p>
+          <p class="patient-info">O+</p>
+        </div>
+
+        <!-- Test Results (Revealed only after Check Severity) -->
+        <div class="mx-2 mt-4" id="testResult" style="display: none;">
+          <div class="test-result-card mx-2 mt-2" id="testResultCard">
+            <p id="testResultHeader">Severity Level</p>
+
+            <!-- Graph -->
+
+          </div>
+        </div>
+        <div class="result-text ml-5 mt-3 mb-0" id="resultText" style="display: none;">
+          <p class="mb-3" id="result"></p>
+          <p class="mb-2" id="resultHeader">Recommendations</p>
+          <p id="recommendation"></p>
+        </div>
+      </div>
+
+
+      <div class="upload-cards mt-4" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+        {% comment %} 
+        <!-- First White Card with Grey Camera Icon -->
+        <div class="white-card mx-2" onclick="triggerFileInput('camera-input')">
+          <!-- File Input for Camera -->
+          <label for="camera-input">
+            <i class="fas fa-camera grey-icon"></i>
+          </label>
+          <input type="file" id="camera-input" style="display: none" accept="image/*" capture="user">
+        </div> 
+        {% endcomment %}
+
+        <!-- Second White Card with Grey Upload Icon -->
+        <div class="white-card mx-2" onclick="triggerFileInput('upload-input')">
+          <!-- File Input for Upload -->
+          <label for="upload-input">
+            <i class="fas fa-cloud-upload-alt grey-icon"></i>
+          </label>
+          <input type="file" id="upload-input" style="display: none" accept="image/*" capture="user">
+        </div>
+      </div>
+
+      <!-- Grouped Bar Chart Section -->
+      <div class="analytics-container">
+        <div class="mt-5" id="container">
+          <canvas id="canvas"></canvas>
+        </div>
+
+        <!-- Small White Card with Percentage -->
+        <div class="white-card mx-3 mt-5" id="percentage-card">
+          <h4 class="percentage mt-5">86%</h4>
+          <p class="percentage-card-content mt-1">You have achieved 86%<br> of your goals this month</p>
+        </div>
+      </div>
+
+      <!-- IMAGE UPLOAD BUTTONS -->
+      <div id="buttons-container" class="mt-5 text-center" style="display: none;">
+        <button class="action-button btn btn-primary mx-2" id="makeDiagnosisButton">Make Diagnosis</button>
+        <button class="btn btn-secondary mx-2" id="retakeButton">Retake</button>
+      </div>
+      
+      <!-- CHECK SEVERITY BUTTON -->
+      <div id="severity-button-container" class="mt-4 text-center" style="display: none;">
+        <button class="action-button btn btn-primary mx-2" id="severityButton">Check Severity</button>
+        <button class="btn btn-secondary mx-2" id="retakeDiagnosisButton">Retake Diagnosis</button>
+      </div>
+
+      <!-- RESULTS BUTTONS -->
+      <div id="result-button-container" class="mt-2 text-center" style="display: none;">
+        <button class="action-button btn btn-primary mx-2" id="saveResultButton">Save Result</button>
+        <button class="btn btn-secondary mx-2" id="retakeTestButton">Retake Test</button>
+      </div>
+
+    </div>
+
+    <!-- White Sidebar on the Right -->
+    <div class="col-md-2 white-sidebar vh-100">
+
+      <div class="profile-tools">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <a href="#"><span class="tools"><i class="fas fa-bell"></i></span></a>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <a href="#"><span class="tools"><i class="fas fa-wrench"></i></span></a>
+      </div>
+
+      <!-- Patient Card -->
+      <div class="patient-card">
+        <!-- Patient Profile Picture -->
+        <img src="{% static 'img/assets/patient_profile.png' %}" alt="Patient Profile" class="patient-profile">
+
+        <!-- Patient Name -->
+        <h5 class="patient-name">Musa Olayinka Eze</h5>
+
+        <!-- Patient Age and Address -->
+        <p class="patient-details">23 years old | 
+          <!-- Stupid map-marker icon -->
+          <svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="9" height="12" fill="#F5F5F5"/>
+          <g id="Make diagnosis" clip-path="url(#clip0_104_2)">
+          <rect width="1440" height="1024" transform="translate(-1300 -250)" fill="#F2F8FD"/>
+          <path id="BG" d="M-165 -237C-165 -244.18 -159.18 -250 -152 -250H142V774H-152C-159.18 774 -165 768.18 -165 761V-237Z" fill="white"/>
+          <g id="Medium_User">
+          <rect x="-141" y="-97" width="263" height="219" rx="15.0145" fill="#F7FBFF"/>
+          <g id="Location">
+          <g id="Location Icon">
+          <path id="Vector" d="M4.75345 0.322556C2.63689 0.322556 0.925049 2.0344 0.925049 4.15096C0.925049 7.02226 4.75345 11.2608 4.75345 11.2608C4.75345 11.2608 8.58185 7.02226 8.58185 4.15096C8.58185 2.0344 6.87001 0.322556 4.75345 0.322556ZM2.01888 4.15096C2.01888 2.64147 3.24397 1.41638 4.75345 1.41638C6.26294 1.41638 7.48802 2.64147 7.48802 4.15096C7.48802 5.72607 5.91291 8.08327 4.75345 9.55447C3.61587 8.09421 2.01888 5.70966 2.01888 4.15096Z" fill="#A3AED0"/>
+          <path id="Vector_2" d="M4.75376 5.51781C5.50889 5.51781 6.12105 4.90565 6.12105 4.15052C6.12105 3.39539 5.50889 2.78323 4.75376 2.78323C3.99863 2.78323 3.38647 3.39539 3.38647 4.15052C3.38647 4.90565 3.99863 5.51781 4.75376 5.51781Z" fill="#A3AED0"/>
+          </g>
+          </g>
+          </g>
+          </g>
+          <defs>
+          <clipPath id="clip0_104_2">
+          <rect width="1440" height="1024" fill="white" transform="translate(-1300 -250)"/>
+          </clipPath>
+          </defs>
+          </svg>
+          Abuja, Nigeria
+        </p>
+
+        <!-- Patient Stats Table -->
+        <table>
+          <tr>
+            <th class="patient-stats">Blood</th>
+            <th class="patient-stats">Height</th>
+            <th class="patient-stats">Weight</th>
+          </tr>
+          <tr>
+            <td class="patient-stats">O+</td>
+            <td class="patient-stats">187cm</td>
+            <td class="patient-stats">83kg</td>
+          </tr>
+        </table>
+      </div>
+
+      <img src="{% static 'img/assets/white-sidebar-content.png' %}" class="white-sidebar-content">
+    </div>
+  </div>
+</div>
+
+<!-- Custom Page Scripts -->
+<script src="{% static 'js/graph.js' %}"></script>
+<script src="{% static 'js/drag_drop.js' %}"></script>
+<script src="{% static 'js/hideDiagnosis.js' %}"></script>
+<script src="{% static 'js/fundusPreview.js' %}"></script>
+
+<!-- Font Awesome Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+<!-- External Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Charts.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Include html2pdf.js library -->
+<script src="{% static 'js/node_modules/html2pdf.js/dist/html2pdf.bundle.min.js' %}"></script>
+
+
+<!-- Script for saving results to PDF -->
+<script>
+  $(document).ready(function () {
+    // Event listener for the Save Result button click
+    $('#saveResultButton').on('click', function () {
+      // Create an element to hold the content you want to save
+      const contentToSave = document.createElement('div');
+
+      // Append the content from patientInfoCard and resultText
+      const patientInfoCardContent = $('#patientInfoCard').html();
+      const resultTextContent = $('#resultText').html();
+
+      contentToSave.innerHTML = patientInfoCardContent + resultTextContent;
+
+      // Append the already loaded image with fixed dimensions
+      const uploadedImage = $('#uploaded-image').clone();
+      const standardImageWidth = 'auto'; // Set your desired standard width
+      const standardImageHeight = 'auto'; // Set your desired standard height
+
+      uploadedImage.attr('width', standardImageWidth);
+      uploadedImage.attr('height', standardImageHeight);
+
+      contentToSave.appendChild(uploadedImage[0]); // Convert to native DOM element
+
+      // Append the logo to the content
+      const logoImage = $('#fundusLogo').clone();
+      logoImage.css({ position: 'absolute', top: '10px', right: '10px', width: 'auto', backgroundColor: '#0447B8'});
+      contentToSave.appendChild(logoImage[0]);
+
+      // Use html2pdf to generate a PDF
+      generatePDF(contentToSave);
+    });
+
+    // Function to generate PDF using html2pdf
+    function generatePDF(content) {
+      html2pdf(content, {
+        margin: 10,
+        filename: 'diagnosis_result.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        // Additional options for html2pdf
+        imageTimeout: 0, // Set to 0 to disable image loading timeout
+        removeContainer: true, // Remove the content container after PDF generation
+      });
+    }
+  });
+</script>
+
+
+
+<!-- IMAGE QUALITY CHECK: AJAX script for hiding Make Diagnosis Button -->
+<script>
+  $(document).ready(function () {
+    // Event listener for the file input change
+    $('#camera-input, #upload-input').on('change', function () {
+      const fileInput = this;
+      const tickIcon = document.getElementById('green-tick');
+      const xIcon = document.getElementById('x-icon');
+
+      // Check if a file is selected
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const formData = new FormData();
+
+        // Append the image to the FormData object
+        formData.append('image', file);
+
+        // Perform AJAX request to check image quality
+        $.ajax({
+          url: "{% url 'check_image_quality' %}",  // Replace with your actual URL
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            // If quality is not high, disable the Make Diagnosis button
+            if (!data.is_high_quality) {
+              $('#makeDiagnosisButton').prop('disabled', true);
+              tickIcon.style.display = 'none';
+              xIcon.style.display = 'flex';
+              alert('Image quality is not high enough for diagnosis.');
+            } else {
+              // If quality is high, enable the Make Diagnosis button
+              $('#makeDiagnosisButton').prop('disabled', false);
+              tickIcon.style.display = 'flex';
+              xIcon.style.display = 'none';
+            }
+          },
+          error: function (error) {
+            console.error('Error checking image quality:', error);
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<!-- IS RETINOPATHY PRESENT: AJAX script for making diagnosis -->
+<script>
+  $(document).ready(function () {
+    // Event listener for the Make Diagnosis button click
+    $('#makeDiagnosisButton').on('click', function () {
+      // Hide the white sidebar and buttons-container
+      $('#buttons-container, #makeDiagnosisHeader').css('display', 'none');
+      // Show the retinopathy status and patientInfoCard
+      $('#retinopathy-status, #patientInfoCard, #severity-button-container').css('display', 'block');
+
+      // Get the button and image-preview-card elements
+      var imagePreviewCard = document.querySelector('.image-preview-card');
+
+      imagePreviewCard.style.width = '400px';
+      imagePreviewCard.style.marginRight = '106px';
+      imagePreviewCard.style.marginLeft = '106px';
+      imagePreviewCard.style.padding = '50px';
+
+      // Get the uploaded image file
+      const fileInput = document.getElementById('upload-input');
+      const uploadedImage = fileInput.files[0];
+
+      // Create FormData and append the image
+      const formData = new FormData();
+      formData.append('image', uploadedImage);
+
+      // Perform AJAX request to check if retinopathy is present
+      $.ajax({
+        url: "{% url 'is_retinopathy_present' %}",  // Replace with your actual URL
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          // Get the status span element
+          const statusSpan = $('#status');
+
+          // Set the text and color based on the response
+          if (data.is_retinopathy_present) {
+            statusSpan.text('Found').css('color', 'red');
+            $('#severityButton').prop('disabled', false);
+          } else {
+            statusSpan.text('Absent').css('color', 'green');
+            $('#severityButton').prop('disabled', true);
+          }
+        },
+        error: function (error) {
+          console.error('Error checking retinopathy:', error);
+        }
+      });
+    });
+  });
+</script>
+
+<!-- CHECK SEVERITY: AJAX script for checking severity level -->
+<script>
+  $(document).ready(function () {
+    // Event listener for the Check Severity button click
+    $('#severityButton').on('click', function () {
+      // Hide unnecessary elements
+      $('#retinopathy-status, #severity-button-container').css('display', 'none');
+      // Show the severity results and button container
+      $('#result-button-container, .result-text').css('display', 'block');
+
+      // Get the uploaded image file
+      const fileInput = document.getElementById('upload-input');
+      const uploadedImage = fileInput.files[0];
+
+      // Create FormData and append the image
+      const formData = new FormData();
+      formData.append('image', uploadedImage);
+
+      // Perform AJAX request to check severity level
+      $.ajax({
+        url: "{% url 'severity_level' %}",  // Replace with your actual URL
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          // Update the result and recommendation paragraphs
+          $('#result').text('Result: ' + data.result[0]);
+          $('#recommendation').text(data.result[1]);
+        },
+        error: function (error) {
+          console.error('Error checking severity level:', error);
+        }
+      });
+    });
+  });
+</script>
+
+
+{% endblock %}

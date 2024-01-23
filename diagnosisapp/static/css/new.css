@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.sidebar {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-sidebar {
+    background-color: blue;
+    color: white;
+    float: left;
+    width: 200px;
+}
+
+.right-sidebar {
+    background-color: white;
+    float: right;
+    width: 200px;
+}
+
+.right-sidebar .icons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.main-content {
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.search-bar {
+    width: 50%;
+    padding: 10px;
+}
+
+.dashboard-info {
+    background-color: blue;
+    color: white;
+    padding: 20px;
+}
+
+.doctor-card {
+    /* Doctor card styles */
+}
+
+.upload-cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.additional-cards {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,415 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container-fluid {
+  justify-content: center;
+  align-items: center;
+}
+
+.blue-sidebar {
+    background-color: #0447B8;
+    color: #fff;
+    position: sticky;
+}
+
+.orange-icons {
+    color: #FF9839;
+}
+
+#mainContent {
+    width: max-content;
+}
+
+.grey-background {
+    background-color: #F2F8FD;
+}
+
+.search-bar {
+    text-align: right;
+    width: 35%;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+/* Styling for the search icon */
+.input-group-text i {
+    background-color: #0447B8;
+    border: 1px solid #0447B8;
+    color: #fff;
+    cursor: pointer;
+}
+
+::placeholder {
+    color: #A5A3A9;
+    font-size: 14px;
+}
+
+.navbar {
+    padding: 0px;
+}
+
+.navbar-brand {
+    margin-left: 40px;
+}
+
+.navbar-nav {
+    margin-right: 50px;
+}
+
+.nav-link {
+    color: #FFFFFF;
+    text-align: left;
+    margin-top: 30px;
+}
+
+.nav-link i {
+    color: #FF9839;
+}
+
+#logout {
+    margin-top: 430px;
+}
+
+// DEBUG FOR SUPRESSED CSS
+.hospital-name {
+    color: #8F92A1;
+    margin-left: auto;
+}
+
+.card-area {
+    background-color: #0447B8;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden; /* Hide overflow content */
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.card-content {
+    margin-left: 120px;
+}
+
+#greeting {
+    color: #FF9839;
+    font-weight: bold;
+}
+
+.greeting-card-content {
+    color: #F2F8FD;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.grey-heading {
+    color: #CED5DC;
+}
+
+.overlay-image {
+    position: absolute;
+    top: -65px;
+    left: 75px;
+    object-fit: cover; /* Keep the aspect ratio and cover the entire area */
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#parent {
+    position: relative;
+}
+
+#retinopathy-status {
+    background-color: #FF9839;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    width: 600px;
+    height: 100px;
+    line-height: 100px;
+}
+
+#status {
+    font-weight: bolder;
+}
+
+.make-diagnosis {
+    color: #000830A6;
+}
+
+.white-card {
+    width: 250px; 
+    height: 150px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out;
+    margin-right: 20px; /* Adjust the margin value as needed */
+}
+
+.white-card:last-child {
+    margin-right: 0; /* Remove margin from the last card */
+}
+
+.white-card:hover {
+    background-color: #f0f0f0;
+}
+
+.upload-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview-card {
+  width: 600px;
+  height: 400px;
+  background-color: #fff;
+  border-radius: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 16px 16px rgba(4, 71, 184, 0.10);
+  overflow: hidden; /* Ensure that the image stays within the boundaries */
+  margin: auto;
+  padding: 80px;
+}
+
+#uploaded-image {
+  width: 100%; /* Make sure the image does not exceed the width of its container */
+  height: 100%; /* Make sure the image does not exceed the height of its container */
+  border-radius: 10px;
+}
+
+.status-icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+    margin-right: 50px;
+}
+
+#buttons-container {
+    margin: auto;
+    width: 452px;
+}
+
+#retakeButton, #retakeDiagnosisButton, #retakeTestButton {
+    background-color: transparent;
+    border-color: #0447B8;
+    border: 1px rgba(4, 71, 184, 0.30) solid;
+    color: black;
+    border-radius: 20px;
+    width: 210px;
+    height: 64px;
+    box-shadow: 0px 4px 15px rgba(4, 71, 184, 0.10);
+}
+
+#makeDiagnosisButton, #saveResultButton {
+    background-color: #0447B8;
+    color: white;
+    border-radius: 20px;
+    width: 210px;
+    height: 64px;
+    box-shadow: 0px 4px 15px rgba(4, 71, 184, 0.10);
+}
+
+#patientInfoCard {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border-radius: 47px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 16px 16px rgba(4, 71, 184, 0.10);
+}
+
+.patient-info-card, .test-result-card{
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    margin-right: 0px;
+}
+
+#patientInfoHeader, #testResultHeader {
+    color: #0447B8;
+    font-size: 24px;
+    font-weight: 500;
+    border-bottom: 0px;
+}
+
+.patient-info-card p {
+    border-bottom: 1px solid rgba(98, 98, 98, 0.4);
+    color: #626262;
+    font-size: 22px;
+    margin-bottom: 35px;
+}
+
+#severityButton {
+    background-color: #0447B8;
+    color: white;
+    border-radius: 20px;
+    width: 210px;
+    height: 64px;
+    box-shadow: 0px 4px 15px rgba(4, 71, 184, 0.10);
+}
+
+#testResult p, .result-text {
+    color: #001942B2;
+}
+
+#testResult {
+    width: 600px;
+    height: 300px;
+    background-color: white;
+    border-radius: 47px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 16px 16px rgba(4, 71, 184, 0.10);
+    margin-right: -500px;
+}
+
+#testResultCard {
+    width: 250px;
+    height: 150px;
+}
+
+#testResultHeader {
+    font-size: larger;
+}
+
+#result {
+    font-size: larger;
+    font-weight: bolder;
+}
+
+#resultHeader {
+    font-size: medium;
+}
+
+#recommendation {
+    font-size: medium;
+    font-weight: lighter;
+}
+
+.grey-icon {
+    color: #CED5DC;
+    width: 80px;
+    height: 80px;
+}
+
+#container {
+    width: 70%;
+    float: left;
+}
+
+.percentage {
+    font-weight: bold;
+    color: #59748A;
+    text-align: center;
+    display: block;
+}
+
+#percentage-card {
+    width: 25%;
+    float: right;
+    margin-right: 50px;
+    flex-direction: column; /* Adjusted to make child elements stack vertically */
+}
+
+.percentage-card-content {
+    color: #6E7191;
+    font-weight: 500;
+    word-wrap: break-word;
+    text-align: center;
+    display: block;
+    font-size: 13px;
+}
+
+.white-sidebar {
+    background-color: #fff;
+    right: 0px;
+    position: sticky;
+    padding: 20px; 
+}
+
+.tools {
+    color: #0447B8;
+}
+
+.patient-card {
+    margin-top: 130px;
+    background-color: #F7FBFF;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.patient-profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: #EAEEFD;
+}
+
+.patient-name {
+    color: #0447B8;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.patient-details {
+    color: #A3AED0;
+    margin-bottom: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    padding-bottom: 5px;
+}
+
+#map-marker {
+    color: #CED5DC;
+}
+
+.patient-card table tr th.patient-stats  {
+    border-right: 1px solid #D4E3F0;
+    margin-top: 10px;
+    padding-top: 0px;
+    color: #85A5C2;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.patient-card table tr td.patient-stats {
+    border-right: 1px solid #D4E3F0;
+    margin-top: 20px;
+    padding-right: 12px;
+    padding-left: 12px;
+    color: #85A5C2;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.patient-card table tr td.patient-stats:last-child {
+    border-right: 0px;
+}
+
+.patient-card table tr th.patient-stats:last-child {
+    border-right: 0px;
+}
+
+.white-sidebar-content {
+    margin-top: 50px;
+    width: 200px;
+}

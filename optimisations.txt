@@ -1,0 +1,5 @@
+- Save results of severity_level and is_retinopathy_present views in database
+- make responsive, obviously
+- loading animation for Ajax functions
+- improve logic for writing image to pdf
+- unique save name for pdf

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Diagnosis{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title text-center">
+            <h4>Make an Instant Diagnosis</h4>
+            <div class="mb-4"></div> <!-- Added space here -->
+          </div>
+
+          {% include 'partials/_messages.html' %}
+
+          {% if form.is_bound %}
+            {% if form.errors %}
+              <div class="alert alert-danger" role="alert">
+                Please correct the errors below.
+              </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+            </form>
+          {% else %}
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/diagnosis.js' %}"></script>
+
+{% endblock content %}

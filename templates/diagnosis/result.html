@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %} <link rel="stylesheet" href="{% static 'css/results.css' %}"> {% endblock %}
+
+{% block title %}Results{% endblock %}
+{% block content %}
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+</style>
+
+<div class="container">
+  <div class="image-container">
+    <!-- Replace 'fundus_image.jpg' with your actual image file -->
+    <img src="{{ diagnosis_instance.image.url }}" alt="Your Fundus Image">
+  </div>
+
+  <div class="details-container">
+    <div class="details">
+      <div class="p-3 mb-2 bg-primary rounded">
+        <h2 class="text-white">Fundus Image Exam Results</h2>
+      </div>
+      <p><strong>Patient Name:</strong> John Doe</p>
+      <p><strong>Exam Date:</strong> January 15, 2023</p>
+      <p><strong class="result-title">Diagnosis Result: </strong>{{ diagnosis_instance.result }}
+      <p><strong class="details-title">Diagnosis Details:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et tellus in odio fermentum fermentum. Nunc nec massa non lectus luctus sagittis. Maecenas finibus, nisi vel tincidunt sodales, massa nulla aliquet justo, vel pellentesque urna purus at turpis.</p>
+      <!-- Add more details as needed -->
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

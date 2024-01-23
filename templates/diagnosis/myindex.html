@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% block title %}Diagnosis{% endblock %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title text-center">
+            <h4>Make an Instant Diagnosis</h4>
+            <div class="mb-4"></div> <!-- Added space here -->
+          </div>
+          <form action="{% url 'diagnosis' %}" method="post">
+            {% csrf_token %}
+
+            {% include 'partials/_messages.html' %}
+            <div class="form-group">
+                
+                <label for="img">Upload a Fundus Image:</label>
+                <input type="file" id="img" name="img" accept="image/*">
+            
+                <div class="mb-4"></div> <!-- Added space here -->
+                <div class="form-group text-center">
+                    <input type="submit" id="submitButton" value="Diagnose" class="btn btn-primary submit-btn" disabled />
+                </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/diagnosis.js' %}"></script>
+
+{% endblock content %}

@@ -23,7 +23,8 @@ from django.conf import settings
 from .forms import DiagnosisForm
 from .models import Diagnosis
 
-from .helpers import isHighQualityImage, isRetinopathyPresent, severityLevel, get_x, get_y, get_features, get_output
+# from .helpers import isHighQualityImage, isRetinopathyPresent, severityLevel, get_x, get_y, get_features, get_output
+from .helpers import isHighQualityImage, isRetinopathyPresent, severityLevel
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import tempfile
 import os

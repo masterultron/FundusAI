@@ -34,31 +34,31 @@ except ImportError:
 
 #------Create/Define all functions
 
-def get_x(r): 
-    return image_path/r['train_image_name']
+# def get_x(r): 
+#     return image_path/r['train_image_name']
 
-def get_y(r): 
-    return r['class']
+# def get_y(r): 
+#     return r['class']
 
-def get_features(r): return image_path/r['image']
+# def get_features(r): return image_path/r['image']
 
-def get_output(r): return r['quality']
+# def get_output(r): return r['quality']
 
-def loadBinaryModel():
-    binaryModel = load_learner(f"{path}/diagnosis/AI_Models/Binary_Prediction_Model.pkl")
-    return binaryModel
+# def loadBinaryModel():
+#     binaryModel = load_learner(f"{path}/diagnosis/AI_Models/Binary_Prediction_Model.pkl")
+#     return binaryModel
 
-def loadMultiModel():
-    multiModel = load_learner(f"{path}/diagnosis/AI_Models/Severity_Prediction_Model.pkl")
-    return multiModel
+# def loadMultiModel():
+#     multiModel = load_learner(f"{path}/diagnosis/AI_Models/Severity_Prediction_Model.pkl")
+#     return multiModel
 
-def loadQualityModel():
-    qualityModel = load_learner(f"{path}/diagnosis/AI_Models/Quality_Assessment.pkl")
-    return qualityModel
+# def loadQualityModel():
+#     qualityModel = load_learner(f"{path}/diagnosis/AI_Models/Quality_Assessment.pkl")
+#     return qualityModel
 
-binaryModel = loadBinaryModel()
-multiModel = loadMultiModel()
-qualityModel = loadQualityModel()
+# binaryModel = loadBinaryModel()
+# multiModel = loadMultiModel()
+# qualityModel = loadQualityModel()
 
 
 # Dummy functions
